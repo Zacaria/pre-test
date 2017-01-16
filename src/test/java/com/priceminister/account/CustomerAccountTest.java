@@ -29,6 +29,7 @@ public class CustomerAccountTest {
     @Before
     public void setUp() throws Exception {
         customerAccount = new CustomerAccount();
+        rule = new CustomerAccountRule(-50.0);
     }
 
     /**
@@ -70,17 +71,37 @@ public class CustomerAccountTest {
     public void testAddNullAmount() throws IllegalAmountException {
         customerAccount.add(null);
     }
-    
+
     /**
-     * Tests that an illegal withdrawal throws the expected exception.
-     * Use the logic contained in CustomerAccountRule; feel free to refactor the existing code.
+     * Tests that a lower amount than the authorized balance
+     * Returns the new balance
+     * And removes the given amount from the balance
+     * @throws IllegalBalanceException
      */
     @Test
-    public void testWithdrawAndReportBalanceIllegalBalance() {
+    public void testWithdrawAndReportBalance () throws IllegalBalanceException, IllegalAmountException {
+        Double lowerAmountThanMinimumBalance = 25.0;
+        Double expectedNewBalance = -25.0;
+        Double newBalance = customerAccount.withdrawAndReportBalance(lowerAmountThanMinimumBalance, rule);
 
-        fail("not yet implemented");
+        assertEquals(expectedNewBalance, newBalance);
     }
-    
-    // Also implement missing unit tests for the above functionalities.
 
+
+    /**
+     * Tests that an illegal withdrawal throws the expected exception.
+     */
+    @Test(expected=IllegalBalanceException.class)
+    public void testWithdrawAndReportBalanceIllegalBalance() throws IllegalBalanceException, IllegalAmountException {
+        Double greaterAmountThanMinimumBalance = 100.0;
+        customerAccount.withdrawAndReportBalance(greaterAmountThanMinimumBalance, rule);
+    }
+
+    /**
+     * Tests that a null amount withdrawal throws the expected exception.
+     */
+    @Test(expected=IllegalAmountException.class)
+    public void testNullWithdrawAndReportBalanceIllegalBalance() throws IllegalBalanceException, IllegalAmountException {
+        customerAccount.withdrawAndReportBalance(null, rule);
+    }
 }

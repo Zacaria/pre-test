@@ -14,14 +14,21 @@ public class CustomerAccount implements Account {
         this.balance = this.balance + addedAmount;
     }
 
+    public Double withdrawAndReportBalance(Double withdrawnAmount, AccountRule rule)
+    		throws IllegalBalanceException, IllegalAmountException {
+        if(withdrawnAmount == null) {
+            throw new IllegalAmountException(withdrawnAmount);
+        }
+
+        Double newAmount = this.balance - withdrawnAmount;
+        if(!rule.withdrawPermitted(newAmount)) {
+            throw new IllegalBalanceException(newAmount);
+        }
+
+        return newAmount;
+    }
+
     public Double getBalance() {
         return balance;
     }
-
-    public Double withdrawAndReportBalance(Double withdrawnAmount, AccountRule rule) 
-    		throws IllegalBalanceException {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
 }

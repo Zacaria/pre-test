@@ -19,11 +19,20 @@ import com.priceminister.account.*;
 
 public class CustomerAccountRule implements AccountRule {
 
+    private Double minimumBalance;
+
+    public CustomerAccountRule(Double minimumBalance) {
+        this.minimumBalance = minimumBalance;
+    }
+
     /* (non-Javadoc)
      * @see com.priceminister.account.AccountRule#withdrawPermitted(java.lang.Double)
      */
     public boolean withdrawPermitted(Double resultingAccountBalance) {
-        return resultingAccountBalance >= 0;
+        return resultingAccountBalance >= minimumBalance;
     }
 
+    public Double getMinimumBalance() {
+        return minimumBalance;
+    }
 }
