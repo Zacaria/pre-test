@@ -11,7 +11,7 @@ public class CustomerAccount implements Account {
         if(addedAmount == null || addedAmount <= 0.0) {
             throw new IllegalAmountException(addedAmount);
         }
-        this.balance = this.balance + addedAmount;
+        balance = balance + addedAmount;
     }
 
     public Double withdrawAndReportBalance(Double withdrawnAmount, AccountRule rule)
@@ -20,7 +20,7 @@ public class CustomerAccount implements Account {
             throw new IllegalAmountException(withdrawnAmount);
         }
 
-        Double newAmount = this.balance - withdrawnAmount;
+        Double newAmount = balance - withdrawnAmount;
         if(!rule.withdrawPermitted(newAmount)) {
             throw new IllegalBalanceException(newAmount);
         }

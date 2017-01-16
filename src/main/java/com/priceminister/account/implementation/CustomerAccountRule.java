@@ -25,9 +25,6 @@ public class CustomerAccountRule implements AccountRule {
         this.minimumBalance = minimumBalance;
     }
 
-    /* (non-Javadoc)
-     * @see com.priceminister.account.AccountRule#withdrawPermitted(java.lang.Double)
-     */
     public boolean withdrawPermitted(Double resultingAccountBalance) {
         return resultingAccountBalance >= minimumBalance;
     }
