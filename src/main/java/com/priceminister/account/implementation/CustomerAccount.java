@@ -5,13 +5,14 @@ import com.priceminister.account.*;
 
 public class CustomerAccount implements Account {
 
+    private Double balance = 0.0;
+
     public void add(Double addedAmount) {
         // TODO Auto-generated method stub
     }
 
     public Double getBalance() {
-        // TODO Auto-generated method stub
-        return null;
+        return balance;
     }
 
     public Double withdrawAndReportBalance(Double withdrawnAmount, AccountRule rule) 
