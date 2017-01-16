@@ -30,7 +30,7 @@ public class CustomerAccountTest {
     public void setUp() throws Exception {
         customerAccount = new CustomerAccount();
     }
-    
+
     /**
      * Tests that an empty account always has a balance of 0.0, not a NULL.
      */
@@ -44,8 +44,31 @@ public class CustomerAccountTest {
      * Adds money to the account and checks that the new balance is as expected.
      */
     @Test
-    public void testAddPositiveAmount() {
-        fail("not yet implemented");
+    public void testAddPositiveAmount() throws IllegalAmountException {
+        // Valid value
+        Double positiveAmount = 15.99;
+
+        customerAccount.add(positiveAmount);
+        assertEquals(positiveAmount, customerAccount.getBalance());
+    }
+
+    /**
+     * Adds a negative value to the account 
+     * And checks that IllegalAmountException exception is thrown
+     */
+    @Test(expected=IllegalAmountException.class)
+    public void testAddNegativeAmount() throws IllegalAmountException {
+        Double negativeAmount = -15.99;
+        customerAccount.add(negativeAmount);
+    }
+
+    /**
+     * Adds a null value to the account 
+     * And checks that IllegalAmountException exception is thrown
+     */
+    @Test(expected=IllegalAmountException.class)
+    public void testAddNullAmount() throws IllegalAmountException {
+        customerAccount.add(null);
     }
     
     /**
@@ -54,6 +77,7 @@ public class CustomerAccountTest {
      */
     @Test
     public void testWithdrawAndReportBalanceIllegalBalance() {
+
         fail("not yet implemented");
     }
     
